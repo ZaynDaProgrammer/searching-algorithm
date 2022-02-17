@@ -1,0 +1,64 @@
+using System;
+
+namespace Test_builds
+{
+    class Program
+    {
+        // Random number generator function
+        static int rand(int minNum, int maxNum) {
+            Random random = new Random();
+            return random.Next(minNum, maxNum);
+        }
+
+        // main function
+        static void Main(string[] args)
+        {
+            //main loop
+            while (true) {
+                // variables
+                int minNum, maxNum, target, tries;
+                tries = 0;
+                bool MainLoop = true;
+                // input taking process here
+                Console.WriteLine("Minimum number: ");
+                minNum = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Max Number: ");
+                maxNum = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Target: ");
+                target = Convert.ToInt32(Console.ReadLine());
+
+                // main random generation loop
+                while (MainLoop == true) {
+                    tries++;
+                    int RNG = rand(minNum, maxNum);
+
+                    //this exists to make sure the minimum number doesnt go over the maximum number and vice versa
+                    if (RNG > target){
+                        maxNum--;
+                    }
+
+                    else if (RNG < target){
+                        minNum++;
+                    }
+                    else if(RNG == target){
+                        MainLoop = false;
+                    }
+
+                    if (maxNum < minNum){
+                        maxNum += minNum;
+                    }
+
+                    else if (minNum > maxNum) {
+                        maxNum += minNum;
+                    }
+                    Console.WriteLine(RNG);
+                }
+                //loop end.
+                Console.WriteLine("Target was reached");
+                Console.WriteLine("it took " + tries + " tries");
+            }
+        }
+    }
+}
